@@ -1,5 +1,5 @@
 <template>
-  <div
+  <section
     class="min-h-screen p-4 flex flex-col items-center justify-center bg-gray-100 text-gray-600 space-y-4"
   >
     <div class="absolute top-6">
@@ -10,18 +10,18 @@
     <template v-if="isQuotesLoaded">
       <div class="relative top-16">
         <div v-for="quote in quotes" :key="quote._id">
-          <div>
-            <p class="my-5 text-lg text-center">
-              <span>"{{ quote.quoteText }}"</span><br />
-              <span class="text-gray-400">- {{ quote.quoteAuthor }}</span>
-            </p>
+          <div class="my-5 text-lg text-center">
+            <div>"{{ quote.quoteText }}"</div>
+            <div class="text-gray-400">- {{ quote.quoteAuthor }}</div>
           </div>
         </div>
       </div>
     </template>
-    <template v-else><div class="text-3xl">Quotes Are Coming..</div></template>
+    <template v-else>
+      <div class="text-3xl">Quotes Are Coming..</div>
+    </template>
     <div v-observe-visibility="handleInfinityScroll" />
-  </div>
+  </section>
 </template>
 
 <script>
