@@ -1,12 +1,14 @@
 <template>
   <div
-    class="min-h-screen p-4 flex flex-col items-center justify-center bg-gray-100 text-gray-600"
+    class="min-h-screen p-4 flex flex-col items-center justify-center bg-gray-100 text-gray-600 space-y-4"
   >
-    <h1 class="text-3xl">Vue Infinite Scrolling</h1>
-    <h2 class="my-4 text-xl text-gray-400">Quotes for infinity and beyond</h2>
+    <div class="absolute top-6">
+      <h1 class="text-3xl">Vue Infinite Scrolling</h1>
+      <h2 class="my-4 text-xl text-gray-400">Quotes for infinity and beyond</h2>
+    </div>
 
-    <div v-if="isQuotesLoaded">
-      <div class="py-4">
+    <template v-if="isQuotesLoaded">
+      <div class="relative top-16">
         <div v-for="quote in quotes" :key="quote._id">
           <div>
             <p class="my-5 text-lg text-center">
@@ -16,8 +18,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <div v-else class="min-h-full text-2xl">Loading...</div>
+    </template>
+    <template v-else><div class="text-3xl">Quotes Are Coming..</div></template>
     <div v-observe-visibility="handleInfinityScroll" />
   </div>
 </template>
@@ -60,12 +62,8 @@ const Quotes = {
     },
 
     handleInfinityScroll(isVisible) {
-      if (!isVisible) {
-        return;
-      }
-      if (this.page >= this.totalpage) {
-        return;
-      }
+      if (!isVisible || this.page >= this.totalPage) return;
+
       this.page++;
       this.getQuotes();
     },
